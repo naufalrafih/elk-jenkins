@@ -1,0 +1,1 @@
+sshpass -p "root" scp -o StrictHostKeyChecking=no -r ./html root@nginx:/www/

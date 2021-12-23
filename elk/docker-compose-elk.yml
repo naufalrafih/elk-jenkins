@@ -1,0 +1,42 @@
+version: "3.1"
+
+services:
+
+  logstash:
+    container_name: logstash
+    image: logstash:2
+    volumes:
+          - ./:/config
+    command: logstash -f /config/logstash.conf
+    links:
+      - elasticsearch
+    depends_on:
+      - elasticsearch
+    networks:
+      - jenkins-nginx_jenkins
+
+  elasticsearch:
+    container_name: elasticsearch
+    image: elasticsearch:2
+    ports:
+      - "9200:9200"
+    networks:
+      - jenkins-nginx_jenkins
+
+  kibana:
+    container_name: kibana
+    image: kibana:4
+    ports:
+      - "5601:5601"
+    links:
+      - elasticsearch
+    environment:
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+    depends_on:
+      - elasticsearch
+    networks:
+      - jenkins-nginx_jenkins
+
+networks:
+  jenkins-nginx_jenkins:
+    external: true

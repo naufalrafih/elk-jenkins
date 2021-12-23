@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  jenkins:
+    container_name: jenkins
+    image: jenkins:jcasc
+    volumes:
+      - jenkins:/var/jenkins_home
+    ports:
+      - 8080:8080
+    networks:
+      - jenkins
+
+  nginx:
+    container_name: nginx
+    image: nginx-server:latest
+    ports:
+      - 5001:80
+    networks:
+      - jenkins
+
+volumes:
+  jenkins:
+
+networks:
+  jenkins:
+    driver: bridge
