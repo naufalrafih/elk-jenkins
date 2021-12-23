@@ -1,6 +1,6 @@
 # elk-jenkins
 
-Log Jenkins job in ELK stack using docker-compose
+Log Jenkins job in ELK stack using docker-compose <br>
 Step by step:
 
 1. Build jenkins and nginx docker images in [jenkis-container](/jenkins-container) and [nginx-container](/nginx-container) folder <br>
